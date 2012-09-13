@@ -1,9 +1,9 @@
 CFLAGS=-g -m32 -Wall -Werror -pedantic
 CC=gcc
 SRC=$(wildcard *.c)
-EXECS=$(SRC:.c=)
-ASSEMBLY_CSRC=csrc/square_ints.c
-ASSEMBLY_SRC=square_ints.S
+ASSEMBLY_CSRC=csrc/square_ints.c csrc/fibonacci.c
+ASSEMBLY_SRC=square_ints.S fibonacci.S
+EXECS=$(SRC:.c=) $(ASSEMBLY_SRC:.S=)
 
 all: $(EXECS)
 
@@ -13,10 +13,10 @@ assembly: $(ASSEMBLY_SRC)
 	$(CC) $(CFLAGS) $< -o $@
 
 %: %.S
-	$(CC) $(CFLAGS) -s -S $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 %.S: csrc/%.c
-	$(CC) $(CFLAGS) -S $< -o $@
+	$(CC) -m32 -Wall -Werror -pedantic -Os -S $< -o $@
 
 clean:
 	rm $(EXECS)
