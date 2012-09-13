@@ -9,6 +9,9 @@ all: $(EXECS)
 
 assembly: $(ASSEMBLY_SRC)
 
+string_modification.s: csrc/string_modification.c
+	$(CC) -m32 -Wall -Werror -pedantic -O0 -S $<
+
 %.s: csrc/%.c
 	$(CC) -m32 -Wall -Werror -pedantic -Os -S $<
 
