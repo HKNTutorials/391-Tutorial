@@ -3,11 +3,12 @@
 int main(void)
 {
     char a[] = "hello";
-    a[0] = 'X';
+		char *p;
+    a[0] = 'H';
     printf("%s\n", a);
 
-    char *p = "world";
-    p[0] = 'Y';
+    p = "world";
+    p[0] = 'W';
     printf("%s\n", p);
     
     return 0;
