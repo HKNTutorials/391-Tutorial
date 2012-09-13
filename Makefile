@@ -9,14 +9,14 @@ all: $(EXECS)
 
 assembly: $(ASSEMBLY_SRC)
 
+%.s: csrc/%.c
+	$(CC) -m32 -Wall -Werror -pedantic -Os -S $<
+
 %: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
 %: %.s
 	$(CC) $(CFLAGS) $< -o $@
 
-%.s: csrc/%.c
-	$(CC) -m32 -Wall -Werror -pedantic -Os -S $< -o $@
-
 clean:
-	rm $(EXECS)
+	rm -f $(EXECS)
