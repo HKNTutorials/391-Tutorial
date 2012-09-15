@@ -1,3 +1,13 @@
+# This program is supposed to initialize an array to the first few integers,
+# square each value and then print out the resulting array. However it looks
+# like whoever wrote it wasn't too great at assembly. Can you fix it up for
+# them?
+
+# You should be comfortable with everything in this file with the exception of
+# the pseudo-ops (those that start with a ., such as .text, .section and .size)
+# and the single instruction sal, which is an arithmetic left shift. So now you
+# should be familiar with all of the assembly code.
+
 	.file	"square_ints.c"
 	.comm	my_array,200,32
 	.text
@@ -101,13 +111,19 @@ printArray:
 	jl	.L13
 	movl	$10, (%esp)
 	call	putchar
-    mov %esp, %ebp
-    pop %ebp
+  mov %esp, %ebp
+  pop %ebp
 	leave
 	ret
 	.size	printArray, .-printArray
 .globl main
 	.type	main, @function
+# This is the main function. It has the general structure:
+# prepare the array (you'll have to figure out what this entails)
+# call fillArray
+# call squareArray
+# call printArray
+# and does nothing else
 main:
 	pushl	%ebp
 	movl	%esp, %ebp
