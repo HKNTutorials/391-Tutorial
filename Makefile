@@ -5,17 +5,13 @@ ASSEMBLY_CSRC=csrc/string_modification.c
 ASSEMBLY_SRC=string_modification.s
 EXECS=$(SRC:.c=)
 
-all: $(EXECS) $(ASSEMBLY_SRC) assembly
+all: $(EXECS) $(ASSEMBLY_SRC) assembly square_ints
 
 assembly: $(ASSEMBLY_SRC:.s=)
 
-# special case rule to prevent mangling of this code
-string_modification.s: csrc/string_modification.c
-	$(CC) -m32 -Wall -Werror -pedantic -O0 -S $<
-
 # compile but do not assemble *.c files in csrc
 %.s: csrc/%.c
-	$(CC) -m32 -Wall -Werror -pedantic -Os -S $<
+	$(CC) -m32 -Wall -Werror -pedantic -O0 -S $<
 
 # compile regular *.c files into executables
 %: %.c

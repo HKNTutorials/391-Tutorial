@@ -4,7 +4,7 @@ int my_array[50];
 
 int* init_array()
 {
-    return NULL;
+    return my_array;
 }
 
 void fillArray(int *array, int len)
@@ -42,7 +42,11 @@ void printArray(int *array, int len)
 
 int main()
 {
-    int *array = init_array();
+    int *array = NULL;
+    int i;
+    for (i = 0; i < 50; i++) {
+        array[i] = 0;
+    }
 
     fillArray(array, 50);
     squareArray(array, 50);
