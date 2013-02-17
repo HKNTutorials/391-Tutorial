@@ -3,10 +3,11 @@ CC=gcc
 SRC=$(wildcard *.c)
 ASSEMBLY_CSRC=csrc/string_modification.c
 ASSEMBLY_SRC=string_modification.s
-EXECS=$(SRC:.c=)
+EXECS=$(SRC:.c=) string_modification square_ints
 
-all: $(EXECS) $(ASSEMBLY_SRC) assembly square_ints
+all: $(EXECS) $(ASSEMBLY_SRC) assembly
 
+.PHONY: assembly
 assembly: $(ASSEMBLY_SRC:.s=)
 
 # compile but do not assemble *.c files in csrc
@@ -23,3 +24,6 @@ assembly: $(ASSEMBLY_SRC:.s=)
 
 clean:
 	rm -f $(EXECS)
+# these are generated assembly files
+	rm -f *.s
+	rm -rf $(addsuffix .dSYM,$(EXECS))
