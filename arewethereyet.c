@@ -32,7 +32,7 @@ void playangrybirds()
 
 int main()
 {
-    //set do_sigint to be the handler for the SIGINT signal (control+c)
+    /* set do_sigint to be the handler for the SIGINT signal (control+c) */
     signal(SIGINT, do_sigint);
 
     if (!there) {
