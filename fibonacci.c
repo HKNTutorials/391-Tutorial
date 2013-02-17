@@ -6,12 +6,11 @@ void makeRecursiveArray(int *array);
 void makeIterativeArray(int *array);
 int getFibonacciNumber(int n);
 
-/*
-	 Generates the first 10 numbers of the Fibonacci sequence and then returns
-	 the last one.
-*/
-int main(void)
-{
+/**
+ * Generates the first 10 numbers of the Fibonacci sequence and then returns
+ * the last one.
+ */
+int main(void) {
 	int array1[10];
 	int array2[10];
 	int i;
@@ -19,37 +18,27 @@ int main(void)
 	makeRecursiveArray(array1);
 	makeIterativeArray(array2);
 
-	for(i = 0; i < 10; i++)
-	{
-		if(array1[i] == array2[i])
-		{
+	for(i = 0; i < 10; i++) {
+		if(array1[i] == array2[i]) {
 			printf("Elements at position %d of both arrays match and are equal to %d.\n", i, array1[i]);
-		}
-		else
-		{
+		} else {
 			printf("Elements at position %d differ: array 1[%d] = %d and array 2[%d] = %d.\n", i, i, array1[i], i, array2[i]);
 		}
 	}
-	return 1;
+	return 0;
 }
 
-int getFibonacciNumber(int n)
-{
-	if(n == 0 || n == 1)
-	{
+int getFibonacciNumber(int n) {
+	if(n == 0 || n == 1) {
 		return 1;
-	}
-	else
-	{
+	} else {
 		return getFibonacciNumber(n - 1) + getFibonacciNumber(n - 2);
 	}
 }
 
-void makeRecursiveArray(int *array)
-{
+void makeRecursiveArray(int *array) {
 	int i;
-	for(i = 0; i < 10; i++)
-	{
+	for(i = 0; i < 10; i++) {
 		*(array + i) = getFibonacciNumber(i);
 	}
 }
