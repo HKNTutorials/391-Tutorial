@@ -1,3 +1,6 @@
+/*
+vim: tw=80:ts=4:sw=4:et
+*/
 #include <stdlib.h>
 #include <stdio.h>
 

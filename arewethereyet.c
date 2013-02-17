@@ -1,3 +1,6 @@
+/*
+vim: tw=80:ts=4:sw=4:et
+*/
 /**
  * This program is supposed to run until it receives SIG INT - i.e.
  * until you press CTRL+C.  But instead it segfaults.  What goes wrong?
@@ -25,7 +28,7 @@ void playangrybirds() {
      */
     if (!there) {
         playangrybirds();
-		}
+    }
 }
 
 int main()
@@ -35,7 +38,7 @@ int main()
 
     if (!there) {
         playangrybirds();
-		}
+    }
 
     return 0;
 }

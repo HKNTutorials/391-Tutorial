@@ -1,4 +1,7 @@
 /*
+vim: tw=80:ts=4:sw=4:et
+*/
+/*
  * This program is supposed to count up to a random (small) number.
  * However, it is buggy - sometimes the loop to print out the numbers seems
  * to keep going forever.  Can you figure out where it goes wrong?
