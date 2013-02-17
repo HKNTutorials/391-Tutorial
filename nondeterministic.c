@@ -13,28 +13,28 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-/* An absolute value function */
-int abs(int x)
-{
-    if (x >= 0)
+/**
+ * An absolute value function
+ */
+int abs(int x) {
+    if (x >= 0) {
         return x;
-    else
+    } else {
         return -x;
+    }
 }
 
 /**
  * Function to return the microseconds of the current clock value.
  * This is not buggy.
  */
-int microtime()
-{
+int microtime() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
     return tv.tv_usec;
 }
 
-int main(int argv, char** argc)
-{
+int main(int argv, char** argc) {
     int a, b, i;
 
     /* seed the random number generator with the microseconds of the
@@ -46,8 +46,7 @@ int main(int argv, char** argc)
     b = abs(a) >> 28; /* this should be a number between 0 and 7 */
 
     /* count! */
-    for (i = 0; i != b; i++)
-    {
+    for (i = 0; i != b; i++) {
         printf("%d\n", i);
     }
 

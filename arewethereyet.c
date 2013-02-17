@@ -10,16 +10,14 @@
 #include <signal.h>
 #include <stdio.h>
 
-volatile int there = 0;
+static volatile int there = 0;
 
-void do_sigint()
-{
+void do_sigint() {
     printf("Detected SIGINT\n");
     there = 1;
 }
 
-void playangrybirds()
-{
+void playangrybirds() {
     /* 
      * An interesting exercise here: If we want to break here when "there"
      * changes to 1, we can do it with either a watchpoint or a conditional
