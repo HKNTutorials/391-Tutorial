@@ -1,4 +1,4 @@
-CFLAGS=-g -m32 -Wall -Werror -pedantic
+CFLAGS=-g -m32 --std=c99 -Wall -Werror -pedantic
 CC=gcc
 SRC=$(wildcard *.c)
 ASSEMBLY_CSRC=csrc/string_modification.c
