@@ -76,3 +76,37 @@ int run_length_encode(char *data, int n, char **buf_ptr) {
   buf[buf_idx++] = last_byte;
   return encoded_length;
 }
+
+/**
+ * Decodes a run-length encoded buffer into a regular data array.
+ *
+ * The inverse of run_length_encode. Takes a buffer enc with length n and stores
+ * a decoded data array at the location pointed to by data_ptr. Returns the
+ * length of the resulting data. It is the caller's responsibility to free this
+ * memory.
+ */
+int run_length_decode(char *enc, int n, char **data_ptr) {
+  if (n == 0) {
+    *data_ptr = NULL;
+    return 0;
+  }
+  // odd encoded lengths don't make sense
+  assert(n % 2 == 0);
+  int decoded_length = 0;
+  int i;
+  // go through all the length bytes and add them up
+  for (i = 0; i < n; i += 2) {
+    decoded_length += (unsigned char) enc[i];
+  }
+  char *buf = malloc(decoded_length);
+  *data_ptr = buf;
+  int dec_idx = 0;
+  for (i = 0; i < n; i += 2) {
+    // need to repeat storing enc[i+1] enc[i] times
+    int offset;
+    for (offset = 0; offset < enc[i]; offset++) {
+      buf[dec_idx++] = enc[i+1];
+    }
+  }
+  return decoded_length;
+}

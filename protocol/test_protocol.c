@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 int run_length_encode(char *data, int n, char **buf);
+int run_length_decode(char *enc, int n, char **data_ptr);
 
 /**
  * Compares arr1 to arr2 up to n. Returns 1 if they are the same and 0 if they
@@ -34,7 +35,7 @@ int array_eq(char *arr1, int n1, char *arr2, int n2) {
   return buf_eq(arr1, arr2, n1);
 }
 
-int main() {
+void test_encode() {
   char *data = NULL;
   char *buf;
   int encoded_length;
@@ -52,4 +53,25 @@ int main() {
   encoded_length = run_length_encode(data, 255+30, &buf);
   char expect2[] = {255, '\x42', 30, '\x42'};
   assert(array_eq(buf, encoded_length, expect2, 4));
+}
+
+void test_decode() {
+  char *enc = NULL;
+  char *data;
+  int decoded_length;
+  decoded_length = run_length_decode(enc, 0, &data);
+  assert(decoded_length == 0);
+  assert(data == NULL);
+
+  char enc1[] = {3, 'b', 1, 'c', 4, 'd'};
+  decoded_length = run_length_decode(enc1, sizeof(enc1), &data);
+  assert(array_eq(data, decoded_length, "bbbcdddd", 8));
+  char enc2[] = {5, '\x3C', 0, 'f', 2, '\x12'};
+  decoded_length = run_length_decode(enc2, sizeof(enc2), &data);
+  assert(array_eq(data, decoded_length, "\x3C\x3C\x3C\x3C\x3C\x12\x12", 7));
+}
+
+int main() {
+  test_encode();
+  test_decode();
 }
