@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdio.h>
 
 int run_length_encode(char *data, int n, char **buf);
 
@@ -41,6 +42,14 @@ int main() {
   assert(encoded_length == 0);
   data = "abcd";
   encoded_length = run_length_encode(data, strlen(data), &buf);
-  assert(encoded_length == 8);
-  assert(buf_eq(buf, "\001a\001b\001c\001d", encoded_length));
+  char expect1[] = {1, 'a', 1, 'b', 1, 'c', 1, 'd'};
+  assert(array_eq(buf, encoded_length, expect1, 8));
+  data = (char *) malloc(255+30);
+  int i;
+  for (i = 0; i < 255+30; i++) {
+    data[i] = '\x42';
+  }
+  encoded_length = run_length_encode(data, 255+30, &buf);
+  char expect2[] = {255, '\x42', 30, '\x42'};
+  assert(array_eq(buf, encoded_length, expect2, 4));
 }
