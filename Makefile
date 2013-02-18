@@ -3,7 +3,7 @@ CC=gcc
 SRC=$(wildcard *.c)
 ASSEMBLY_CSRC=csrc/string_modification.c
 ASSEMBLY_SRC=string_modification.s
-EXECS=$(SRC:.c=) string_modification square_ints
+EXECS=$(SRC:.c=) string_modification
 
 all: $(EXECS) $(ASSEMBLY_SRC) assembly
 
