@@ -47,7 +47,7 @@ int run_length_encode(char *data, int n, char **buf_ptr) {
         current_length++;
     } else {
       // Record length of the last run.
-      encoded_length += 2;
+      encoded_length += 1;
       // Starting a new run.
       last_byte = data[i];
       current_length = 1;
@@ -62,7 +62,7 @@ int run_length_encode(char *data, int n, char **buf_ptr) {
   int buf_idx = 0;
   last_byte = data[0];
   for (i = 0; i < n; i++) {
-    if (data[i] == last_byte && current_length < 255) {
+    if (data[i] == last_byte && current_length < 256) {
       current_length++;
     } else {
       assert(current_length <= 255);
@@ -92,7 +92,7 @@ int run_length_decode(char *enc, int n, char **data_ptr) {
   }
   // odd encoded lengths don't make sense
   assert(n % 2 == 0);
-  int decoded_length = 0;
+  int decoded_length;
   int i;
   // go through all the length bytes and add them up
   for (i = 0; i < n; i += 2) {
@@ -104,8 +104,8 @@ int run_length_decode(char *enc, int n, char **data_ptr) {
   for (i = 0; i < n; i += 2) {
     // need to repeat storing enc[i+1] enc[i] times
     int offset;
-    for (offset = 0; offset < enc[i]; offset++) {
-      buf[dec_idx++] = enc[i+1];
+    for (offset = 0; offset < enc[i+1]; offset++) {
+      buf[dec_idx++] = enc[i];
     }
   }
   return decoded_length;
