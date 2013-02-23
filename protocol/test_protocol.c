@@ -52,8 +52,8 @@ void test_encode() {
   }
   encoded_length = run_length_encode(data, 255+30, &buf);
 
-  // 0x7F is 255 in decimal
-  char expect2[] = {'\x7F', '\x42', 30, '\x42'};
+  // 0xFF is 255 in decimal
+  char expect2[] = {'\xFF', '\x42', 30, '\x42'};
   assert(array_eq(buf, encoded_length, expect2, 4));
 }
 
